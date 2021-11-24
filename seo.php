@@ -181,7 +181,6 @@ class seoPlugin extends Plugin
             $page->header()->title = $page->header()->googletitle;
         };
         if (isset($page->header()->googlekeywords)) {
-            $meta['keywords']['name']      = 'keywords';
             $meta['keywords']['content']   = $page->header()->googlekeywords;
         }
         $meta['description']['name']      = 'description';
@@ -226,6 +225,10 @@ class seoPlugin extends Plugin
                 $meta['twitter:description']['name']      = 'twitter:description';
                 $meta['twitter:description']['property']  = 'twitter:description';
                 $meta['twitter:description']['content']   = $page->header()->twitterdescription;
+            } else if ($page->header()->googledescall == 1 && isset($page->header()->googledesc)) {
+                $meta['twitter:card']['name']      = 'twitter:card';
+                $meta['twitter:card']['property']  = 'twitter:card';
+                $meta['twitter:card']['content']   = $page->header()->googledesc;
             } else {
                 $meta['twitter:description']['name']      = 'twitter:description';
                 $meta['twitter:description']['property']  = 'twitter:description';
@@ -255,45 +258,38 @@ class seoPlugin extends Plugin
          if (property_exists($page->header(),'facebookenable')){
          if ($page->header()->facebookenable == 'true') {
 
-                //$meta['og:sitename']['name']        = 'og:sitename';
                 $meta['og:site_name']['property']    = 'og:site_name';
                 $meta['og:site_name']['content']     = $this->config->get('site.title');
             if (isset($page->header()->facebooktitle)) {
-                //$meta['og:title']['name']           = 'og:title';
                 $meta['og:title']['property']       = 'og:title';
                 $meta['og:title']['content']        = $page->header()->facebooktitle;
             } else {
-               // $meta['og:title']['name']           = 'og:title';
                 $meta['og:title']['property']       = 'og:title';
                 $meta['og:title']['content']        = $page->title();
             }
             if (isset($config['facebookid'])) {
-                //$meta['twitter:site']['name']      = 'twitter:site';
                 $meta['fb:app_id']['property']  = 'fb:app_id';
                 $meta['fb:app_id']['content']   = $config->facebookid;
             };
-                //$meta['og:type']['name']            = 'og:type';
                 $meta['og:type']['property']        = 'og:type';
                 $meta['og:type']['content']         = 'article';
-               // $meta['og:url']['name']             = 'og:url';
                 $meta['og:url']['property']         = 'og:url';
                 $meta['og:url']['content']          = $this->grav['page']->canonical(true);
             if (isset($page->header()->facebookdesc)) {
-                //$meta['og:description']['name']     = 'og:description';
                 $meta['og:description']['property'] = 'og:description';
                 $meta['og:description']['content'] =  substr($this->cleanMarkdown($page->header()->facebookdesc),0,320);
+            } else if ($page->header()->googledescall == 1 && isset($page->header()->googledesc)) {
+              $meta['og:description']['property'] = 'og:description';
+              $meta['og:description']['content'] =  $page->header()->googledesc;
             } else {
-               // $meta['og:description']['name']     = 'og:description';
                 $meta['og:description']['property'] = 'og:description';
                 $meta['og:description']['content'] =  $cleanedMarkdown;
             }
             if (isset($page->header()->facebookauthor)) {
-              //  $meta['article:author']['name']     = 'article:author';
                 $meta['article:author']['property'] = 'article:author';
                 $meta['article:author']['content'] =   $page->header()->facebookauthor;
             }
             if (isset($page->header()->facebookimg)) {
-               // $meta['og:image']['name']     = 'og:image';
                 $meta['og:image']['property'] = 'og:image';
                 $facebookimg = $page->header()->facebookimg;
                 $imagedata = $this->seoGetimage($facebookimg);
