@@ -1,11 +1,11 @@
 name: "SEO"
-version: "3.0.0"
+version: "3.0.0.alix-3"
 description: "Manage your site’s meta tags for display in search engine results or social media networks. Includes an easy-to-use live preview feature."
 icon: "google"
 testing: true
 author:
-  name: "Paul Massendari"
-  email: "paul@massendari.com"
+  name: "Paul Massendari, Alix Guillard"
+  email: "paul@massendari.com, github@blog.re"
 homepage: "https://github.com/paulmassen/grav-plugin-seo"
 keywords: ["seo", "meta", "microdata", "schema", "plugin"]
 bugs: "https://github.com/paulmassen/grav-plugin-seo/issues"
@@ -158,4 +158,3 @@ form:
                 0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
-        
